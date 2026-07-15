@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nucleus — Developer Setup Guide</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#fff; --ink:#1f2430; --muted:#5b6472;
+    --accent:#4f46e5; --accent-soft:#eef0fe; --line:#e6e8ee;
+    --code-bg:#1e2330; --code-ink:#e7ebf3;
+    --warn-bg:#fff7ed; --warn-line:#f0a35e; --warn-ink:#7a3d00;
+    --ok-bg:#eefaf1; --ok-line:#57b06a; --ok-ink:#155230;
+    --info-bg:#eef5ff; --info-line:#5aa2e6; --info-ink:#0b4a77;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0f1420; --card:#161c2b; --ink:#e7ebf3; --muted:#9aa6bd; --line:#26304a;
+    --accent:#8b93ff; --accent-soft:#20263c; --code-bg:#0a0e18;
+    --warn-bg:#2a2113; --warn-ink:#f0c48a; --ok-bg:#12241a; --ok-ink:#9fe0b0; --info-bg:#12233a; --info-ink:#a8d0f5;
+  }}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.6;
+    font-family:"Segoe UI",system-ui,-apple-system,"Nirmala UI","Noto Sans Gujarati",sans-serif}
+  .gu{font-family:"Nirmala UI","Noto Sans Gujarati","Segoe UI",sans-serif}
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--card) 88%,transparent);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{max-width:880px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+  .brand{font-weight:700;font-size:1.05rem}.brand b{color:var(--accent)}
+  .toggle{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .toggle button{border:0;background:transparent;padding:6px 15px;font-size:.9rem;cursor:pointer;color:var(--muted)}
+  .toggle button.active{background:var(--accent);color:#fff}
+  main{max-width:880px;margin:0 auto;padding:26px 20px 72px}
+  .hero h1{font-size:1.95rem;margin:.1em 0}
+  .hero p{color:var(--muted);font-size:1.06rem;margin:.35em 0 0}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:0 1px 3px rgba(20,30,60,.05)}
+  .step h2{display:flex;align-items:center;gap:12px;font-size:1.18rem;margin:.05em 0 .5em}
+  .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem}
+  .step.opt .num{background:var(--accent-soft);color:var(--accent)}
+  ul{margin:.4em 0;padding-left:1.15em}li{margin:.25em 0}
+  a{color:var(--accent)}
+  code.inl{background:var(--accent-soft);color:var(--accent);padding:.08em .4em;border-radius:5px;font-size:.9em;font-family:Consolas,monospace}
+  .cmd{position:relative;background:var(--code-bg);border-radius:10px;margin:10px 0;padding:0}
+  .cmd code{display:block;color:var(--code-ink);padding:14px 52px 14px 16px;font-family:"Cascadia Code",Consolas,monospace;font-size:.87rem;white-space:pre;overflow-x:auto}
+  .cmd .copy{position:absolute;top:8px;right:8px;background:#333b4d;color:#cfd6e4;border:0;border-radius:6px;padding:4px 9px;font-size:.72rem;cursor:pointer}
+  .cmd .copy:hover{background:#465071}
+  .call{border-left:4px solid;border-radius:8px;padding:11px 14px;margin:12px 0;font-size:.95rem}
+  .call.warn{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn-ink)}
+  .call.ok{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok-ink)}
+  .call.info{background:var(--info-bg);border-color:var(--info-line);color:var(--info-ink)}
+  .why{color:var(--muted);font-size:.9rem;margin-top:6px}
+  .pill{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:600;margin:3px 4px 3px 0}
+  footer{max-width:880px;margin:0 auto;padding:22px 20px;color:var(--muted);font-size:.85rem;text-align:center}
+  body.en .gu{display:none}body.gu .en{display:none}
+</style>
+</head>
+<body class="en">
+<header><div class="bar">
+  <div class="brand">Nucleus <b>·</b> Setup</div>
+  <div class="toggle" role="group" aria-label="Language">
+    <button id="b-en" class="active" onclick="setLang('en')">English</button>
+    <button id="b-gu" class="gu" onclick="setLang('gu')">ગુજરાતી</button>
+  </div>
+</div></header>
+
+<main>
+  <section class="hero">
+    <h1><span class="en">Developer Setup Guide</span><span class="gu">ડેવલપર સેટઅપ માર્ગદર્શિકા</span></h1>
+    <p><span class="en">From a blank Windows 11 PC to the Nucleus app running on your machine — step by step.</span><span class="gu">ખાલી Windows 11 PC થી લઈને Nucleus એપ્લિકેશન તમારા કમ્પ્યુટર પર ચાલુ થાય ત્યાં સુધી — પગલું-દર-પગલું.</span></p>
+  </section>
+
+  <div class="call info">
+    <span class="en"><b>How this works:</b> two things you install by hand, then one script installs everything, and one script sets up the project. About 30 minutes, mostly hands-off.</span>
+    <span class="gu"><b>આ કેવી રીતે કામ કરે છે:</b> બે વસ્તુ તમે જાતે ઇન્સ્ટોલ કરો, પછી એક સ્ક્રિપ્ટ બધું ઇન્સ્ટોલ કરે છે, અને એક સ્ક્રિપ્ટ પ્રોજેક્ટ સેટઅપ કરે છે. લગભગ 30 મિનિટ, મોટાભાગનું ઓટોમેટિક.</span>
+  </div>
+
+  <div class="step opt">
+    <h2><span class="num">0</span><span class="en">Install two things by hand</span><span class="gu">બે વસ્તુઓ જાતે ઇન્સ્ટોલ કરો</span></h2>
+    <p><span class="en">Everything else is automated. Start with these:</span><span class="gu">બાકી બધું ઓટોમેટિક છે. આનાથી શરૂ કરો:</span></p>
+    <ul>
+      <li><a href="https://git-scm.com/download/win">Git for Windows</a> — <span class="en">version control, and the shell the tools use.</span><span class="gu">વર્ઝન કંટ્રોલ, અને શેલ જે બધા ટૂલ વાપરે છે.</span></li>
+      <li><a href="https://claude.com/claude-code">Claude Code</a> — <span class="en">your main tool here; it can run the whole setup for you.</span><span class="gu">તમારું મુખ્ય સાધન; તે આખું સેટઅપ તમારા માટે ચલાવી શકે છે.</span></li>
+    </ul>
+    <div class="call info">
+      <span class="en">If PowerShell refuses to run scripts, run this once:</span>
+      <span class="gu">જો PowerShell સ્ક્રિપ્ટ ચલાવવાની ના પાડે, તો એક વાર આ ચલાવો:</span>
+      <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">1</span><span class="en">Install the toolchain</span><span class="gu">ટૂલચેઇન (સાધનો) ઇન્સ્ટોલ કરો</span></h2>
+    <p><span class="en">In PowerShell, run the bootstrap script and approve the admin (UAC) prompt:</span><span class="gu">PowerShell માં bootstrap સ્ક્રિપ્ટ ચલાવો અને એડમિન (UAC) પ્રોમ્પ્ટને મંજૂરી આપો:</span></p>
+    <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>.\bootstrap.ps1</code></div>
+    <p><span class="en">It installs, automatically:</span><span class="gu">તે આપમેળે આ ઇન્સ્ટોલ કરે છે:</span></p>
+    <div>
+      <span class="pill">Node.js</span><span class="pill">Python</span><span class="pill">Docker + WSL2</span><span class="pill">VS Code</span><span class="pill">GitHub CLI</span><span class="pill">PowerShell 7</span><span class="pill">Windows Terminal</span><span class="pill">DBeaver</span><span class="pill">MongoDB Compass</span>
+    </div>
+    <p class="why"><span class="en">Databases run inside Docker containers — nothing is installed on Windows directly.</span><span class="gu">ડેટાબેઝ Docker કન્ટેનર અંદર ચાલે છે — Windows પર સીધું કંઈ ઇન્સ્ટોલ થતું નથી.</span></p>
+    <div class="call warn">
+      <span class="en"><b>Restart your PC when it finishes.</b> Docker and WSL need the reboot before they will start.</span>
+      <span class="gu"><b>પૂરું થાય પછી PC રીસ્ટાર્ટ કરો.</b> Docker અને WSL શરૂ થાય તે પહેલાં રીસ્ટાર્ટ જરૂરી છે.</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">2</span><span class="en">Sign in to GitHub &amp; Docker</span><span class="gu">GitHub અને Docker માં સાઇન ઇન કરો</span></h2>
+    <p><span class="en">These two are interactive — do them yourself:</span><span class="gu">આ બે વસ્તુઓ જાતે કરવાની છે:</span></p>
+    <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>gh auth login</code></div>
+    <p><span class="en">Choose: <b>GitHub.com → HTTPS → Login with a web browser</b>, copy the one-time code, and authorize in the browser.</span><span class="gu">પસંદ કરો: <b>GitHub.com → HTTPS → બ્રાઉઝર દ્વારા લોગિન</b>, વન-ટાઇમ કોડ કૉપિ કરો, અને બ્રાઉઝરમાં મંજૂરી આપો.</span></p>
+    <p><span class="en">Then open <b>Docker Desktop</b> once and accept its licence agreement.</span><span class="gu">પછી <b>Docker Desktop</b> એક વાર ખોલો અને તેની લાઇસન્સ શરત સ્વીકારો.</span></p>
+    <p class="why"><span class="en">GitHub login must happen before installing — Nucleus depends on a private repository.</span><span class="gu">ઇન્સ્ટોલ કરતાં પહેલાં GitHub લોગિન જરૂરી છે — Nucleus એક ખાનગી રિપોઝીટરી પર આધાર રાખે છે.</span></p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">3</span><span class="en">Set up the project</span><span class="gu">પ્રોજેક્ટ સેટઅપ કરો</span></h2>
+    <p><span class="en">Clone Nucleus, then run its setup script:</span><span class="gu">Nucleus ક્લોન કરો, પછી તેની સેટઅપ સ્ક્રિપ્ટ ચલાવો:</span></p>
+    <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>gh repo clone vardan-kabra/nucleus C:\dev\nucleus
+cd C:\dev\nucleus
+.\scripts\dev-setup.ps1</code></div>
+    <p><span class="en">This installs all dependencies, starts the database (Postgres on port <b>5440</b>), runs the migrations and tests, and clones the related repos — all automatically.</span><span class="gu">આ બધી ડિપેન્ડન્સી ઇન્સ્ટોલ કરે છે, ડેટાબેઝ (પોર્ટ <b>5440</b> પર Postgres) શરૂ કરે છે, migration અને ટેસ્ટ ચલાવે છે, અને સંબંધિત રિપો ક્લોન કરે છે — બધું આપમેળે.</span></p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">4</span><span class="en">Run it</span><span class="gu">એપ્લિકેશન ચલાવો</span></h2>
+    <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>npm run dev</code></div>
+    <div class="call ok">
+      <span class="en">Open <b>http://localhost:3200</b> — you should see the Nucleus operator console. You're set up! 🎉</span>
+      <span class="gu"><b>http://localhost:3200</b> ખોલો — તમને Nucleus ઓપરેટર કન્સોલ દેખાવું જોઈએ. સેટઅપ પૂરું! 🎉</span>
+    </div>
+  </div>
+
+  <div class="step opt">
+    <h2><span class="num">?</span><span class="en">If something goes wrong</span><span class="gu">કંઈક ખોટું થાય તો</span></h2>
+    <ul>
+      <li><span class="en"><code class="inl">npm install</code> finished but Prisma or the tests break → run <code class="inl">npm approve-scripts --all</code>.</span><span class="gu"><code class="inl">npm install</code> પૂરું થયું પણ Prisma કે ટેસ્ટ કામ ન કરે → <code class="inl">npm approve-scripts --all</code> ચલાવો.</span></li>
+      <li><span class="en">Install fails on <code class="inl">@fountainhead/design-system</code> → you're not logged into GitHub; run <code class="inl">gh auth login</code> first.</span><span class="gu"><code class="inl">@fountainhead/design-system</code> પર ઇન્સ્ટોલ નિષ્ફળ → તમે GitHub માં લોગિન નથી; પહેલા <code class="inl">gh auth login</code> કરો.</span></li>
+      <li><span class="en">Docker or WSL won't start → make sure you restarted the PC after Step 1. Check with <code class="inl">wsl --status</code>.</span><span class="gu">Docker કે WSL શરૂ ન થાય → ખાતરી કરો કે Step 1 પછી PC રીસ્ટાર્ટ કર્યું છે. <code class="inl">wsl --status</code> થી તપાસો.</span></li>
+      <li><span class="en">A database test times out the first time → run it again; it passes the second time (cold start).</span><span class="gu">પહેલી વાર ડેટાબેઝ ટેસ્ટ ટાઇમઆઉટ થાય → ફરી ચલાવો; બીજી વાર પાસ થશે (કોલ્ડ સ્ટાર્ટ).</span></li>
+      <li><span class="en">Ports to remember: Postgres = <b>5440</b>, the app = <b>3200</b>.</span><span class="gu">યાદ રાખવાના પોર્ટ: Postgres = <b>5440</b>, એપ્લિકેશન = <b>3200</b>.</span></li>
+    </ul>
+    <div class="call info">
+      <span class="en"><b>Stuck on any step?</b> Open Claude Code and paste the setup prompt from the README — it runs every step and explains as it goes, in plain language.</span>
+      <span class="gu"><b>કોઈ પગલામાં અટકી ગયા?</b> Claude Code ખોલો અને README માંથી સેટઅપ પ્રોમ્પ્ટ પેસ્ટ કરો — તે દરેક પગલું ચલાવે છે અને સરળ ભાષામાં સમજાવે છે.</span>
+    </div>
+  </div>
+</main>
+
+<footer>Nucleus ERP · Fountainhead Schools — <span class="en">internal developer onboarding</span><span class="gu">આંતરિક ડેવલપર ઓનબોર્ડિંગ</span></footer>
+
+<script>
+  function setLang(l){
+    document.body.className=l;
+    document.getElementById('b-en').classList.toggle('active',l==='en');
+    document.getElementById('b-gu').classList.toggle('active',l==='gu');
+    document.documentElement.lang=(l==='gu'?'gu':'en');
+    try{localStorage.setItem('nucleus-lang',l)}catch(e){}
+  }
+  try{var s=localStorage.getItem('nucleus-lang');if(s)setLang(s);}catch(e){}
+  function cp(btn){
+    var t=btn.parentNode.querySelector('code').innerText;
+    navigator.clipboard.writeText(t).then(function(){var o=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=o},1200);});
+  }
+</script>
+</body>
+</html>
