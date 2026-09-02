@@ -8,8 +8,20 @@ deps, DB, run - lives in the `nucleus` repo under `docs/ONBOARDING.md` + `script
 1. Install **Git for Windows** and **Claude Code** by hand (the only two you can't script).
 2. `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`  — once, if scripts are blocked.
 3. `.\bootstrap.ps1`  — approve the UAC prompt. Installs the toolchain + WSL2, then **reboot**.
-4. `gh auth login`, then launch **Docker Desktop** and accept its license.
+4. `gh auth login` (and `railway login` if you deploy), then launch **Docker Desktop** and accept its license.
 5. `gh repo clone vardan-kabra/nucleus C:\dev\nucleus` -> `cd C:\dev\nucleus` -> `.\scripts\dev-setup.ps1`.
+
+`bootstrap.ps1 -Full` additionally installs the estate's **optional** tooling — ffmpeg +
+faster-whisper (the feedback-extraction skill) and k6 (the Tier-0 load profiles). Off by default:
+nobody joining the team needs either, and faster-whisper is a heavy install.
+
+## Setting up the WHOLE estate, not just the `nucleus` repo
+The two scripts above set up **one** repo. For a machine that also needs `nucleus-prototypes`
+(~26 apps), the design system and the decisions repo — i.e. a full replacement for my own machine —
+hand [`NUCLEUS-ESTATE-SETUP.md`](NUCLEUS-ESTATE-SETUP.md) to Claude Code instead. It drives these
+same scripts, then covers the rest: exact clone paths, per-app Postgres containers, the carry-over
+items no installer can supply (`.env` files, Claude memory, connector auth, droplet SSH keys), and
+the traps this estate has already hit.
 
 ## ...or let Claude Code drive it
 Open Claude Code in an empty folder and paste:
