@@ -74,8 +74,28 @@
     <span class="gu"><b>આ કેવી રીતે કામ કરે છે:</b> બે વસ્તુ તમે જાતે ઇન્સ્ટોલ કરો, પછી એક સ્ક્રિપ્ટ બધું ઇન્સ્ટોલ કરે છે, અને એક સ્ક્રિપ્ટ પ્રોજેક્ટ સેટઅપ કરે છે. લગભગ 30 મિનિટ, મોટાભાગનું ઓટોમેટિક.</span>
   </div>
 
+  <div class="step">
+    <h2><span class="en">What you're setting up</span><span class="gu">તમે શું સેટઅપ કરી રહ્યા છો</span></h2>
+    <p><span class="en"><b>Nucleus</b> is the ERP we are building in-house for the school — admissions, HR, results, fees, transport. Alongside it is a second repository of about two dozen smaller apps, each proving one capability on realistic data before it is built into the main system.</span><span class="gu"><b>Nucleus</b> એ શાળા માટે આપણે જાતે બનાવી રહ્યા છીએ તે ERP છે — એડમિશન, HR, પરિણામ, ફી, ટ્રાન્સપોર્ટ. તેની સાથે બીજી એક રિપોઝીટરી છે જેમાં આશરે બે ડઝન નાની એપ્લિકેશન છે; દરેક એપ્લિકેશન કોઈ એક ક્ષમતા વાસ્તવિક ડેટા પર સાબિત કરે છે, તે મુખ્ય સિસ્ટમમાં ઉમેરાય તે પહેલાં.</span></p>
+    <p><span class="en">It is all one stack, so learning it once covers everything: <b>Next.js</b> and <b>TypeScript</b> for the apps, <b>Postgres</b> for the data, <b>Prisma</b> in between.</span><span class="gu">બધું એક જ સ્ટૅક છે, એટલે એક વાર શીખ્યા પછી બધે કામ લાગે છે: એપ્લિકેશન માટે <b>Next.js</b> અને <b>TypeScript</b>, ડેટા માટે <b>Postgres</b>, અને વચ્ચે <b>Prisma</b>.</span></p>
+    <div class="call ok">
+      <span class="en"><b>You cannot break anything.</b> Everything here runs only on your own machine. The live systems staff use are deployed elsewhere and are not touched by any of this.</span>
+      <span class="gu"><b>તમે કંઈ બગાડી શકતા નથી.</b> અહીંનું બધું ફક્ત તમારા પોતાના કમ્પ્યુટર પર ચાલે છે. સ્ટાફ જે લાઇવ સિસ્ટમ વાપરે છે તે બીજે ડિપ્લોય થયેલી છે અને આનાથી તેને કંઈ થતું નથી.</span>
+    </div>
+  </div>
+
   <div class="step opt">
-    <h2><span class="num">0</span><span class="en">Install two things by hand</span><span class="gu">બે વસ્તુઓ જાતે ઇન્સ્ટોલ કરો</span></h2>
+    <h2><span class="num">0</span><span class="en">Accept your GitHub invitations</span><span class="gu">તમારા GitHub આમંત્રણો સ્વીકારો</span></h2>
+    <p><span class="en">You have been invited to the private repositories. Open <a href="https://github.com/notifications">github.com/notifications</a>, or the email from GitHub, and accept every one.</span><span class="gu">તમને ખાનગી રિપોઝીટરીઓમાં આમંત્રણ મોકલવામાં આવ્યું છે. <a href="https://github.com/notifications">github.com/notifications</a> ખોલો, અથવા GitHub તરફથી આવેલો ઈમેલ જુઓ, અને દરેક આમંત્રણ સ્વીકારો.</span></p>
+    <div class="call warn">
+      <span class="en"><b>Do this first, and don't leave it.</b> GitHub invitations expire after 7 days, and nobody is told when they lapse.</span>
+      <span class="gu"><b>આ સૌથી પહેલાં કરો, મુલતવી ન રાખો.</b> GitHub આમંત્રણ 7 દિવસ પછી સમાપ્ત થઈ જાય છે, અને સમાપ્ત થાય ત્યારે કોઈને જાણ થતી નથી.</span>
+    </div>
+    <p class="why"><span class="en">Every repository here is private. Until the invitations are accepted, the setup script cannot download a single line of code.</span><span class="gu">અહીંની દરેક રિપોઝીટરી ખાનગી છે. આમંત્રણ સ્વીકારાય નહીં ત્યાં સુધી સેટઅપ સ્ક્રિપ્ટ કોડની એક લીટી પણ ડાઉનલોડ કરી શકતી નથી.</span></p>
+  </div>
+
+  <div class="step opt">
+    <h2><span class="num">1</span><span class="en">Install two things by hand</span><span class="gu">બે વસ્તુઓ જાતે ઇન્સ્ટોલ કરો</span></h2>
     <p><span class="en">Everything else is automated. Start with these:</span><span class="gu">બાકી બધું ઓટોમેટિક છે. આનાથી શરૂ કરો:</span></p>
     <ul>
       <li><a href="https://git-scm.com/download/win">Git for Windows</a> — <span class="en">version control, and the shell the tools use.</span><span class="gu">વર્ઝન કંટ્રોલ, અને શેલ જે બધા ટૂલ વાપરે છે.</span></li>
@@ -89,7 +109,7 @@
   </div>
 
   <div class="step">
-    <h2><span class="num">1</span><span class="en">Install the toolchain</span><span class="gu">ટૂલચેઇન (સાધનો) ઇન્સ્ટોલ કરો</span></h2>
+    <h2><span class="num">2</span><span class="en">Install the toolchain</span><span class="gu">ટૂલચેઇન (સાધનો) ઇન્સ્ટોલ કરો</span></h2>
     <p><span class="en">In PowerShell, run the bootstrap script and approve the admin (UAC) prompt:</span><span class="gu">PowerShell માં bootstrap સ્ક્રિપ્ટ ચલાવો અને એડમિન (UAC) પ્રોમ્પ્ટને મંજૂરી આપો:</span></p>
     <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>.\bootstrap.ps1</code></div>
     <p><span class="en">It installs, automatically:</span><span class="gu">તે આપમેળે આ ઇન્સ્ટોલ કરે છે:</span></p>
@@ -104,25 +124,30 @@
   </div>
 
   <div class="step">
-    <h2><span class="num">2</span><span class="en">Sign in to GitHub &amp; Docker</span><span class="gu">GitHub અને Docker માં સાઇન ઇન કરો</span></h2>
+    <h2><span class="num">3</span><span class="en">Sign in to GitHub &amp; Docker</span><span class="gu">GitHub અને Docker માં સાઇન ઇન કરો</span></h2>
     <p><span class="en">These two are interactive — do them yourself:</span><span class="gu">આ બે વસ્તુઓ જાતે કરવાની છે:</span></p>
     <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>gh auth login</code></div>
     <p><span class="en">Choose: <b>GitHub.com → HTTPS → Login with a web browser</b>, copy the one-time code, and authorize in the browser.</span><span class="gu">પસંદ કરો: <b>GitHub.com → HTTPS → બ્રાઉઝર દ્વારા લોગિન</b>, વન-ટાઇમ કોડ કૉપિ કરો, અને બ્રાઉઝરમાં મંજૂરી આપો.</span></p>
     <p><span class="en">Then open <b>Docker Desktop</b> once and accept its licence agreement.</span><span class="gu">પછી <b>Docker Desktop</b> એક વાર ખોલો અને તેની લાઇસન્સ શરત સ્વીકારો.</span></p>
-    <p class="why"><span class="en">GitHub login must happen before installing — Nucleus depends on a private repository.</span><span class="gu">ઇન્સ્ટોલ કરતાં પહેલાં GitHub લોગિન જરૂરી છે — Nucleus એક ખાનગી રિપોઝીટરી પર આધાર રાખે છે.</span></p>
+    <p class="why"><span class="en">GitHub login must happen before installing — Nucleus depends on a private repository. Skip it and the install fails naming the design system, not the missing login, which sends people hunting in the wrong place.</span><span class="gu">ઇન્સ્ટોલ કરતાં પહેલાં GitHub લોગિન જરૂરી છે — Nucleus એક ખાનગી રિપોઝીટરી પર આધાર રાખે છે. આ છોડી દો તો ઇન્સ્ટોલ નિષ્ફળ થાય છે અને ભૂલમાં ડિઝાઇન સિસ્ટમનું નામ આવે છે, ખૂટતા લોગિનનું નહીં — એટલે લોકો ખોટી જગ્યાએ શોધવા લાગે છે.</span></p>
   </div>
 
   <div class="step">
-    <h2><span class="num">3</span><span class="en">Set up the project</span><span class="gu">પ્રોજેક્ટ સેટઅપ કરો</span></h2>
+    <h2><span class="num">4</span><span class="en">Set up the project</span><span class="gu">પ્રોજેક્ટ સેટઅપ કરો</span></h2>
     <p><span class="en">Clone Nucleus, then run its setup script:</span><span class="gu">Nucleus ક્લોન કરો, પછી તેની સેટઅપ સ્ક્રિપ્ટ ચલાવો:</span></p>
     <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>gh repo clone vardan-kabra/nucleus C:\dev\nucleus
 cd C:\dev\nucleus
 .\scripts\dev-setup.ps1</code></div>
     <p><span class="en">This installs all dependencies, starts the database (Postgres on port <b>5440</b>), runs the migrations and tests, and clones the related repos — all automatically.</span><span class="gu">આ બધી ડિપેન્ડન્સી ઇન્સ્ટોલ કરે છે, ડેટાબેઝ (પોર્ટ <b>5440</b> પર Postgres) શરૂ કરે છે, migration અને ટેસ્ટ ચલાવે છે, અને સંબંધિત રિપો ક્લોન કરે છે — બધું આપમેળે.</span></p>
+    <div class="call info">
+      <span class="en"><b>Clone, don't download a ZIP.</b> Downloading a ZIP is fine for this setup folder, but the code repositories must be cloned — that is what lets Git track your changes and lets you send work back. The command above does it for you.</span>
+      <span class="gu"><b>ZIP ડાઉનલોડ નહીં, clone કરો.</b> આ સેટઅપ ફોલ્ડર માટે ZIP ડાઉનલોડ કરવું ઠીક છે, પણ કોડની રિપોઝીટરીઓ clone કરવી જ પડે — તેનાથી જ Git તમારા ફેરફારો ટ્રૅક કરે છે અને તમે કામ પાછું મોકલી શકો છો. ઉપરનો આદેશ એ કામ તમારા માટે કરે છે.</span>
+    </div>
+    <p class="why"><span class="en">Use exactly <code class="inl">C:\dev\nucleus</code>. Several tools store settings against the full folder path, so a different location works but breaks small things confusingly later.</span><span class="gu">બરાબર <code class="inl">C:\dev\nucleus</code> જ વાપરો. કેટલાંક ટૂલ પૂરા ફોલ્ડર પાથ સામે સેટિંગ સાચવે છે, એટલે બીજી જગ્યાએ ચાલશે તો ખરું, પણ પછી નાની નાની વસ્તુઓ ગૂંચવણભરી રીતે બગડે છે.</span></p>
   </div>
 
   <div class="step">
-    <h2><span class="num">4</span><span class="en">Run it</span><span class="gu">એપ્લિકેશન ચલાવો</span></h2>
+    <h2><span class="num">5</span><span class="en">Run it</span><span class="gu">એપ્લિકેશન ચલાવો</span></h2>
     <div class="cmd"><button class="copy" onclick="cp(this)">Copy</button><code>npm run dev</code></div>
     <div class="call ok">
       <span class="en">Open <b>http://localhost:3200</b> — you should see the Nucleus operator console. You're set up! 🎉</span>
@@ -131,11 +156,17 @@ cd C:\dev\nucleus
   </div>
 
   <div class="step opt">
+    <h2><span class="num">+</span><span class="en">If you also need the smaller apps</span><span class="gu">જો તમને નાની એપ્લિકેશન પણ જોઈએ</span></h2>
+    <p><span class="en">Step 4 sets up the main Nucleus system. The two dozen smaller apps live in <code class="inl">nucleus-prototypes</code>, each with its own database and its own port.</span><span class="gu">પગલું 4 મુખ્ય Nucleus સિસ્ટમ સેટઅપ કરે છે. બે ડઝન નાની એપ્લિકેશન <code class="inl">nucleus-prototypes</code> માં છે, દરેકનું પોતાનું ડેટાબેઝ અને પોતાનો પોર્ટ છે.</span></p>
+    <p><span class="en">You don't have to work that out by hand. Open Claude Code in an empty folder and paste in <code class="inl">NUCLEUS-ESTATE-SETUP.md</code> from this same folder — it runs every step, stops wherever you need to sign in, and explains as it goes.</span><span class="gu">એ જાતે શોધવાની જરૂર નથી. ખાલી ફોલ્ડરમાં Claude Code ખોલો અને આ જ ફોલ્ડરમાંથી <code class="inl">NUCLEUS-ESTATE-SETUP.md</code> પેસ્ટ કરો — તે દરેક પગલું ચલાવે છે, જ્યાં સાઇન ઇન કરવાનું હોય ત્યાં અટકે છે, અને સાથે સાથે સમજાવે છે.</span></p>
+  </div>
+
+  <div class="step opt">
     <h2><span class="num">?</span><span class="en">If something goes wrong</span><span class="gu">કંઈક ખોટું થાય તો</span></h2>
     <ul>
       <li><span class="en"><code class="inl">npm install</code> finished but Prisma or the tests break → run <code class="inl">npm approve-scripts --all</code>.</span><span class="gu"><code class="inl">npm install</code> પૂરું થયું પણ Prisma કે ટેસ્ટ કામ ન કરે → <code class="inl">npm approve-scripts --all</code> ચલાવો.</span></li>
       <li><span class="en">Install fails on <code class="inl">@fountainhead/design-system</code> → you're not logged into GitHub; run <code class="inl">gh auth login</code> first.</span><span class="gu"><code class="inl">@fountainhead/design-system</code> પર ઇન્સ્ટોલ નિષ્ફળ → તમે GitHub માં લોગિન નથી; પહેલા <code class="inl">gh auth login</code> કરો.</span></li>
-      <li><span class="en">Docker or WSL won't start → make sure you restarted the PC after Step 1. Check with <code class="inl">wsl --status</code>.</span><span class="gu">Docker કે WSL શરૂ ન થાય → ખાતરી કરો કે Step 1 પછી PC રીસ્ટાર્ટ કર્યું છે. <code class="inl">wsl --status</code> થી તપાસો.</span></li>
+      <li><span class="en">Docker or WSL won't start → make sure you restarted the PC after Step 2. Check with <code class="inl">wsl --status</code>.</span><span class="gu">Docker કે WSL શરૂ ન થાય → ખાતરી કરો કે Step 2 પછી PC રીસ્ટાર્ટ કર્યું છે. <code class="inl">wsl --status</code> થી તપાસો.</span></li>
       <li><span class="en">A database test times out the first time → run it again; it passes the second time (cold start).</span><span class="gu">પહેલી વાર ડેટાબેઝ ટેસ્ટ ટાઇમઆઉટ થાય → ફરી ચલાવો; બીજી વાર પાસ થશે (કોલ્ડ સ્ટાર્ટ).</span></li>
       <li><span class="en">Ports to remember: Postgres = <b>5440</b>, the app = <b>3200</b>.</span><span class="gu">યાદ રાખવાના પોર્ટ: Postgres = <b>5440</b>, એપ્લિકેશન = <b>3200</b>.</span></li>
     </ul>
