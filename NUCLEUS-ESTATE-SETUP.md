@@ -143,23 +143,44 @@ npm run dev
 Read each app's `package.json` first — the migrate script is variously `db:migrate`, `prisma:migrate`
 or `db:deploy`, and not every app has a `seed`.
 
-## Phase 5 — the things that CANNOT be installed (I have to supply them)
+## Phase 5 — the state that CANNOT be installed
 
-List these back to me as a checklist and wait. Don't guess at values.
+Most of this is a copy, and `carry-over.ps1` in this same folder does it. **Run Phase 3 first** —
+it skips an `.env` whose repo is not cloned yet rather than scattering files into empty folders.
 
-1. **`.env` files.** Every real `.env` is gitignored — the repo carries only `.env.example`, one per
-   app. Sources: `railway variables` per service for deployed apps, my old machine for local-only
-   ones. **Never paste a secret value into the chat** — write it straight to the file.
-2. **Claude Code memory** — `~/.claude/projects/C--dev-nucleus-prototypes/memory/` (~95 files plus
-   `MEMORY.md`). It lives in no git repo. Copy the whole folder from the old machine, and the sibling
-   project folders too. This is why the clone paths must match exactly.
-3. **`~/.claude/settings.json`** — model/effort defaults, permissions, hooks. Copy it across.
-4. **MCP connectors / plugins** re-authorise per machine (Gmail, Drive, Calendar, GitHub…), via
-   claude.ai connector settings or `/mcp` in an interactive session. Cannot be scripted.
-5. **SSH keys for the DigitalOcean droplets** — the roster gateway and the HRIS punch relay. Copy
-   `~/.ssh` from the old machine, or I'll add a fresh key to both droplets.
-6. **Git identity**: `git config --global user.name` / `user.email`, plus `init.defaultBranch main`,
+On the **old** machine (preview first — that is the default, `-Apply` does the work):
+
+```powershell
+cd C:\dev\nucleus-onboarding
+.\carry-over.ps1 -Export -IncludeSsh
+.\carry-over.ps1 -Export -IncludeSsh -Apply -To D:\carry
+```
+
+Move `D:\carry` across on an encrypted disk — it holds live database URLs, OAuth secrets and an
+unencrypted private key. Then on **this** machine:
+
+```powershell
+.\carry-over.ps1 -Import -From D:\carry
+.\carry-over.ps1 -Import -From D:\carry -Apply
+```
+
+That covers the `.env` files, `~/.claude/projects/<slug>/memory/`, `~/.claude/settings.json`, and —
+with `-IncludeSsh` — `~/.ssh` (whose private key it re-locks with `icacls`, or ssh refuses it).
+Anything it replaces is backed up alongside as `<file>.pre-carryover`. **Show me its preview output
+before you run `-Apply`.**
+
+Three things it deliberately cannot do — list them back to me and wait:
+
+1. **`.env` files it did not find**, because they only ever existed in Railway. Get those with
+   `railway variables` per service. **Never paste a secret value into the chat** — write it straight
+   to the file.
+2. **MCP connectors / plugins**, which re-authorise per machine (Gmail, Drive, Calendar, GitHub…)
+   via claude.ai connector settings or `/mcp` in an interactive session.
+3. **Git identity**: `git config --global user.name` / `user.email`, plus `init.defaultBranch main`,
    `core.autocrlf true`, `pull.rebase false`.
+
+If the old machine is not reachable, say so — then the `.env` files come from Railway and I add a
+fresh SSH key to the droplets by hand, and the Claude memory is simply lost.
 
 ## Phase 6 — verify, and show me the actual output
 
