@@ -15,6 +15,21 @@ deps, DB, run - lives in the `nucleus` repo under `docs/ONBOARDING.md` + `script
 faster-whisper (the feedback-extraction skill) and k6 (the Tier-0 load profiles). Off by default:
 nobody joining the team needs either, and faster-whisper is a heavy install.
 
+## Moving state off an old machine — `carry-over.ps1`
+`bootstrap.ps1` installs software; **`carry-over.ps1` moves the state no installer can supply** —
+every real `.env`, Claude Code's saved memory (`~/.claude/projects/<slug>/memory/`),
+`~/.claude/settings.json`, and optionally `~/.ssh`. Export on the old machine, import on the new one:
+
+```powershell
+.\carry-over.ps1 -Export -IncludeSsh              # preview; -Apply -To <dir> to collect
+.\carry-over.ps1 -Import -From <dir>              # preview; -Apply to restore
+```
+
+**Preview is the default on both sides** — nothing moves without `-Apply`. The bundle is not
+encrypted and holds live secrets, so `-Apply` refuses to write it anywhere inside a git work tree;
+move it on an encrypted disk and delete it afterwards. Run it **after** the repos are cloned: it
+skips an `.env` whose repo is missing rather than scattering files into empty folders.
+
 ## Setting up the WHOLE estate, not just the `nucleus` repo
 The two scripts above set up **one** repo. For a machine that also needs `nucleus-prototypes`
 (~26 apps), the design system and the decisions repo — i.e. a full replacement for my own machine —
